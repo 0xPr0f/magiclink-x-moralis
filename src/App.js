@@ -44,7 +44,7 @@ function App() {
       // sending 0.5 tokens with 18 decimals
       const options = {
         type: "erc20",
-        amount: Moralis.Units.Token(amount, "18"),
+        amount: Moralis.Units.Token(`${amount}`),
         receiver: accountr,
         contractAddress: tokenaddress,
       };
