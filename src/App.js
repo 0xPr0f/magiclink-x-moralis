@@ -2,6 +2,7 @@ import "./App.css";
 import logo from "./logo.svg";
 import w3authlogo from "./web3authlogo.png";
 import { useMoralis } from "react-moralis";
+import { Modal } from "antd";
 import { Abi } from "./abi";
 import { useEffect, useState } from "react";
 
@@ -18,7 +19,11 @@ function App() {
   } = useMoralis();
   const [email, setEmail] = useState("");
   const [balance, setbalance] = useState();
+  const [amount, setamount] = useState();
+  const [accountr, setaccountr] = useState();
+  const [tokenaddress, settokenaddress] = useState();
   const [info, setinfo] = useState();
+  const [open1, setOpen1] = useState();
   useEffect(() => {
     async function lol() {
       const options = {
@@ -32,6 +37,21 @@ function App() {
     }
     lol();
   }, [account]);
+
+  const sendErc20 = async () => {
+    if (tokenaddress?.length > 40 && accountr?.length > 40) {
+      console.log(tokenaddress, accountr);
+      // sending 0.5 tokens with 18 decimals
+      const options = {
+        type: "erc20",
+        amount: Moralis.Units.Token(amount, "18"),
+        receiver: accountr,
+        contractAddress: tokenaddress,
+      };
+      await Moralis.transfer(options);
+    }
+  };
+
   const Mint = async () => {
     const options = {
       contractAddress: "0x0639666C3D9bcF4ad739210663443D0C8fDA369b",
@@ -50,7 +70,7 @@ function App() {
       provider: "magicLink",
       email: email,
       apiKey: "pk_live_8160960D4F2F7EE4",
-      network: "kovan",
+      network: "mumbai",
     }).then(() => {
       async function ball() {
         const options = {
@@ -66,6 +86,15 @@ function App() {
     });
   };
 
+  const handleOk = () => {
+    sendErc20();
+    setOpen1(false);
+  };
+
+  const handleCan = () => {
+    setOpen1(false);
+  };
+
   return (
     <div className="backgroundParent">
       {isAuthenticated ? (
@@ -79,6 +108,49 @@ function App() {
         </h2>
       ) : null}
 
+      <Modal visible={open1} onOk={handleOk} onCancel={handleCan}>
+        <div>
+          <div>
+            <h2>Send ERC20 Tokens</h2>
+          </div>
+          <br />
+          <span> Token Contract Address</span>
+          <br />
+          <input
+            type="text"
+            className="input"
+            placeholder="Token Address"
+            value={tokenaddress}
+            onChange={(e) => {
+              settokenaddress(e.target.value);
+            }}
+          />
+          <br />
+          <span> Reciever Address</span>
+          <br />
+          <input
+            type="text"
+            className="input"
+            placeholder="Reciever Address"
+            value={accountr}
+            onChange={(e) => {
+              setaccountr(e.target.value);
+            }}
+          />
+          <br />
+          <span> Amount</span>
+          <br />
+          <input
+            type="text"
+            className="input"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => {
+              setamount(e.target.value);
+            }}
+          />
+        </div>
+      </Modal>
       <div style={{ display: "flex" }}>
         <div className="App">
           <h2>Test Magic x Moralis</h2>
@@ -162,9 +234,22 @@ function App() {
                 {isAuthenticated ? "MINT" : "lol"}
               </button>
             </div>
+            ------------------------------------------------------------
+            <br />
+            ------------------------------------------------------------
+            <br />
+            <button
+              className="loginButton"
+              onClick={() => {
+                setOpen1(true);
+              }}
+            >
+              Send ERC20 token
+            </button>
           </div>
         ) : null}
       </div>
+
       <div>
         For some reason, styling was hard, bear with me
         <div>
