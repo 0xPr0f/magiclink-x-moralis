@@ -1,0 +1,104 @@
+.App {
+  margin: auto;
+  width: 300px;
+  min-height: 250px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+.input {
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+
+.logos{
+  max-width: 100%;
+  display: flex;
+  position: relative;
+  height: 125px;
+  margin: 0 0 1em;
+}
+
+.logos img{
+  width: 42%;
+  display: block;
+}
+
+.logos img:nth-of-type(1){
+  position: absolute;
+  top: .3em;
+  left: 3em;
+  width: 38%;
+}
+
+.logos img:nth-of-type(2){
+  top: 0;
+  position: absolute;
+  right: 2.5em;
+}
+.loginButton {
+  padding: 10px;
+  border-radius: 20px;
+  border-width: 0px;
+  color: white;
+  background-image: linear-gradient(90deg, #0364ff, #1ac7fe);
+  width: 100%;
+  cursor: pointer;
+}
+
+.buttonCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.error {
+  color: red;
+  font-size: 10px;
+}
+.backgroundParent {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.accountDetails{
+  word-wrap: break-word;
+  margin-bottom: 2em;
+}
+
+.accountDetails h5{
+  text-align: left;
+}
+
+.accountDetails h5, .accountDetails p{
+  margin: 0;
+}
+
+.green {
+  color: green;
+}
+
+a {
+  color: #21BF96;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h2, h5{
+  color: #041836;
+}
