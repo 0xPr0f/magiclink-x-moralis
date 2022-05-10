@@ -1,1 +1,1 @@
-# Web3Auth test
+# Magiclink test
